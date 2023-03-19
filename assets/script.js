@@ -121,3 +121,9 @@ localStorage.setItem("quizResultsList", JSON.stringify(resultsList));
     document.getElementById("result").innerHTML = "Quiz finished! You got " + correctAnswers + "/10 correct answers. </br> Time remaining: " + timeLeft + " seconds. </br> <a href='results.html'>Click here to see your results.</a>";
   }
 }
+
+// Display the first quiz question and answer choices
+//displayQuiz();
+
+var storedResultsList = localStorage.getItem("quizResultsList");
+var resultsList = storedResultsList ? JSON.parse(storedResultsList) : [];
