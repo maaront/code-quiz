@@ -1,12 +1,14 @@
-//Set up timer
-// Set the starting time in seconds
-var timeLeft = 90;
-
-// Get the countdown timer element
+var countdownTimer;
+var timeLeft;
 var countdownTimerEl = document.getElementById("countdown-timer");
 
-// Set up the timer interval
-var countdownTimer = setInterval(function() {
+function startQuiz() {
+// Get the countdown timer element
+// var countdownTimerEl = document.getElementById("countdown-timer");
+// Set the starting time in seconds
+timeLeft = 90;
+// Set the timer
+countdownTimer = setInterval(function() {
   // Display the current time left in the HTML element
   countdownTimerEl.innerHTML = timeLeft;
 
@@ -22,6 +24,13 @@ var countdownTimer = setInterval(function() {
     countdownTimerEl.innerHTML = "Time's up!";
   }
 }, 1000);
+
+// Disable the "Start Quiz" button
+document.getElementById("start-quiz").disabled = true;
+
+// Display the first quiz question and answer choices
+displayQuiz();
+}
 
 // Set the questions and answers
 var correctAnswers = 0;
@@ -63,6 +72,7 @@ function displayQuiz() {
   }
   document.getElementById("choices").innerHTML = choicesHTML;
 }
+
 // Check the user's answer and display a message
 function checkAnswer() {
   // Get the user's answer
@@ -118,7 +128,7 @@ resultsList.sort(function(a, b) {
 localStorage.setItem("quizResultsList", JSON.stringify(resultsList));
 
 // Display a message indicating that the quiz is finished
-    document.getElementById("result").innerHTML = "Quiz finished! You got " + correctAnswers + "/10 correct answers. </br> Time remaining: " + timeLeft + " seconds. </br> <a href='results.html'>Click here to see your results.</a>";
+document.getElementById("result").innerHTML = "Quiz finished! You got " + correctAnswers + "/" + quiz.length + " correct answers. </br> Time remaining: " + timeLeft + " seconds. </br> <a href='results.html'>Click here to see your results.</a>";
   }
 }
 
