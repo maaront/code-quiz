@@ -63,3 +63,61 @@ function displayQuiz() {
   }
   document.getElementById("choices").innerHTML = choicesHTML;
 }
+// Check the user's answer and display a message
+function checkAnswer() {
+  // Get the user's answer
+  var selectedAnswer = document.querySelector('input[name="answer"]:checked');
+
+  // Check if an answer is selected
+  if (selectedAnswer) {
+    // Check if the answer is correct
+    if (selectedAnswer.value == quiz[quizIndex].answer) {
+      // Display a message indicating that the answer is correct
+      document.getElementById("result").innerHTML = "Correct!";
+       // Increment the correctAnswers count
+      correctAnswers++;
+
+    } else {
+      // Display a message indicating that the answer is incorrect
+      document.getElementById("result").innerHTML = "Incorrect. 10 seconds deducted from time remaining.";
+      
+      // Subtract 10 seconds from the countdown timer
+      timeLeft -= 10;
+    }
+  } else {
+    // Display an error message if no answer is selected
+    document.getElementById("result").innerHTML = "Please select an answer.";
+  }
+
+  // Move to the next quiz question or finish the quiz
+  quizIndex++;
+  if (quizIndex < quiz.length) {
+    // Display the next quiz question and answer choices
+    displayQuiz();
+  } else {
+
+// Clear the timer interval (pause the timer)
+clearInterval(countdownTimer);
+
+// Redefine timer to ensure time left shows exactly what the results show
+countdownTimerEl.innerHTML = timeLeft;
+// Save the current result
+var currentResult = {
+  timeLeft: timeLeft
+};
+
+// Add the current result to the list
+resultsList.push(currentResult);
+
+// Sort the list in descending order based on the time remaining
+resultsList.sort(function(a, b) {
+  return b.timeLeft - a.timeLeft;
+});
+
+// Save the sorted list back to local storage
+localStorage.setItem("quizResultsList", JSON.stringify(resultsList));
+
+// Display a message indicating that the quiz is finished
+    document.getElementById("result").innerHTML = "Quiz finished! You got " + correctAnswers + "/10 correct answers. </br> Time remaining: " + timeLeft + " seconds. </br> <a href='results.html'>Click here to see your results.</a>";
+  }
+}
