@@ -22,3 +22,44 @@ var countdownTimer = setInterval(function() {
     countdownTimerEl.innerHTML = "Time's up!";
   }
 }, 1000);
+
+// Set the questions and answers
+var correctAnswers = 0;
+
+const quiz = [
+    {
+        question: "A very useful tool used during development and debugging for printing content to the debugger is:",
+        choices: ["JavaScript", "terminal", "console log", "for loops"],
+        answer: 2 
+    },
+
+    {
+        question: "Arrays in JavaScript can be used to store:",
+        choices: ["Numbers and strings", "Other strings", "Booleans", "All of the above"],
+        answer: 3
+    },
+  
+]
+
+// Set the starting quiz index to 0
+var quizIndex = 0;
+
+// Display the current quiz question and answer choices
+function displayQuiz() {
+
+  document.getElementById("quiz-intro").style = "display: none";
+  document.getElementById("submit-btn").style = "display: inline";
+
+  // Get the current quiz question and answer choices
+  var question = quiz[quizIndex].question;
+  var choices = quiz[quizIndex].choices;
+
+  // Display the current quiz question and answer choices in the HTML
+  document.getElementById("question").innerHTML = question;
+
+  var choicesHTML = "";
+  for (var i = 0; i < choices.length; i++) {
+    choicesHTML += '<li><label><input type="radio" name="answer" value="' + i + '">' + choices[i] + '</label></li>';
+  }
+  document.getElementById("choices").innerHTML = choicesHTML;
+}
