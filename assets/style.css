@@ -1,0 +1,130 @@
+/* Global styles */
+
+html {
+	scroll-behavior: smooth;
+    cursor: default;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --dark: #272727;
+  --medium: #cecece;
+  --light: #ffffff;
+  --accent-color: #03b3ff;
+}
+
+body {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+h1 {
+    font-size: 42px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+p {
+    font-size: 18px;
+}
+
+a {
+    color: var(--accent-color);
+}
+
+button {
+    background: var(--accent-color);
+    padding: 10px 25px;
+    border-radius: 5px;
+    border: 0;
+    margin: 20px 0;
+    color: white;
+    font-size: 20px;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 100px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 80%;
+    margin: auto;
+    
+}
+
+/* Quiz Intro */
+
+.quiz-intro {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    justify-content: center;
+    margin: auto;
+}
+
+#quiz-intro p {
+    padding: 20px 0;
+}
+
+/* Question Card */
+.question-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 20px;
+}
+
+.question-card h2 {
+    padding: 20px;
+}
+
+.question-card li {
+    background-color: var(--light);
+    color: var(--accent-color);
+    list-style-type: none;
+    margin: 5px 0;
+    min-width: 300px;
+    border-radius: 5px;
+}
+
+.question-card li:hover {
+    background-color: var(--accent-color);
+    color: var(--light);
+}
+
+.question-card li label {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0;
+}
+
+li label {
+    padding: 10px 0 0 0;
+}
+
+/* Set default submit button has hidden (script.js reveals this once quiz starts) */
+#submit-btn {
+    display: none;
+}
+
+/* Quiz results */
+.quiz-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+}
+
