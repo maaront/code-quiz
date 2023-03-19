@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>Coding Quiz Challenge</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  </head>
+<body>
+    <nav>
+        <p><a href="results.html" class="highscores">View High Scores</a></p>
+        <p>Time Left: <span id="countdown-timer">90</span></p>
+    </nav>
+    <header>
+        <span id="quiz-intro">
+            <h1>Coding Quiz Challenge</h1>
+            <p>Try to answer the following code-related questions within the time imit. Incorrect answers will penalize your score time by ten seconds.</p>    
+            <button id="start-quiz" onclick="startQuiz()">Start Quiz</button>
+        </span>
+    </header>
+    <main>
+        <span class="question-card">
+            <h2 id="question"></h2>
+            <ul id="choices"></ul>
+            <button onclick="checkAnswer()" id="submit-btn">Submit Answer</button>
+            <p id="result"></p>
+        </span>
+    </main>
+
+    <script src="assets/script.js"></script>  
+</body>
+</html>
