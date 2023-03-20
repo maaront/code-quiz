@@ -196,9 +196,7 @@ function saveInitials() {
 
   // Check if initials are entered
   if (initials.trim() === "") {
-    alert("Please enter your initials.");
-    
-    checkAnswer(); // Return early without hiding the initials form
+    // document.getElementById("initials-copy").innerHTML = "Initials cannot be blank.";
     return;
   }
 
