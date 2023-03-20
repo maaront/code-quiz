@@ -127,6 +127,11 @@ resultsList.sort(function(a, b) {
 // Save the sorted list back to local storage
 localStorage.setItem("quizResultsList", JSON.stringify(resultsList));
 
+// Clear the question, choices, and submit button from the screen
+document.getElementById("question").innerHTML = "";
+document.getElementById("choices").innerHTML = "";
+document.getElementById("submit-btn").style = "display: none";
+
 // Display a message indicating that the quiz is finished
 document.getElementById("result").innerHTML = "Quiz finished! You got " + correctAnswers + "/" + quiz.length + " correct answers. </br> Time remaining: " + timeLeft + " seconds. </br> <a href='results.html'>Click here to see your results.</a>";
   }

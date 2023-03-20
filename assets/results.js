@@ -17,6 +17,7 @@ if (storedResultsList) {
 } else {
   // Display a message if there are no results in local storage
   document.getElementById("results").innerHTML = "No results found.";
+  document.getElementById("clear-scores").style = "display: none";
 }
 
 

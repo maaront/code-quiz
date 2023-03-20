@@ -125,6 +125,11 @@ label:focus-within {
     color: var(--light);
 }
 
+input {
+position: fixed;
+opacity: 0;
+pointer-events: none;
+}
 
 /* Set default submit button has hidden (script.js reveals this once quiz starts) */
 #submit-btn {
@@ -144,9 +149,12 @@ ol li {
     padding: 5px 0;
 }
 
-#results {
+#result {
     margin-top: 30px;
+    line-height: 25px;
 }
 
-
+#results {
+    padding-top: 30px;
+}
 
