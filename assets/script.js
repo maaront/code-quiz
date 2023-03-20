@@ -68,7 +68,7 @@ function displayQuiz() {
 
   var choicesHTML = "";
   for (var i = 0; i < choices.length; i++) {
-    choicesHTML += '<li><label><input type="radio" name="answer" value="' + i + '">' + choices[i] + '</label></li>';
+    choicesHTML += '<li><label class="list-item"><input type="radio" name="answer" value="' + i + '" onchange="toggleStyle(this)">' + choices[i] + '</label></li>';
   }
   document.getElementById("choices").innerHTML = choicesHTML;
 }

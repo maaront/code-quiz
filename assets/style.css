@@ -108,12 +108,14 @@ header {
 .question-card li label {
     display: inline-block;
     width: 100%;
-    padding: 10px 0;
+    padding: 10px;
 }
 
-li label {
-    padding: 10px 0 0 0;
+.list-item.checked {
+    background-color: var(--accent-color);
+    color: var(--light);
 }
+
 
 /* Set default submit button has hidden (script.js reveals this once quiz starts) */
 #submit-btn {
@@ -127,4 +129,12 @@ li label {
     align-items: center;
     text-align: left;
 }
+
+/**/
+/* input[type="radio"]{
+    visibility:hidden;
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+} */
 
