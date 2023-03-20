@@ -1,45 +1,13 @@
 var countdownTimer;
-var timeLeft;
+var timeLeft = 90;
 var countdownTimerEl = document.getElementById("countdown-timer");
-
-function startQuiz() {
-  // Get the countdown timer element
-  // var countdownTimerEl = document.getElementById("countdown-timer");
-  // Set the starting time in seconds
-  timeLeft = 90;
-  // Set the timer
-  countdownTimer = setInterval(function () {
-    // Display the current time left in the HTML element
-    countdownTimerEl.innerHTML = timeLeft;
-
-    // Subtract one second from the time left
-    timeLeft--;
-
-    // Check if the time has run out
-    if (timeLeft < 0) {
-      // Clear the timer interval
-      clearInterval(countdownTimer);
-
-      // Display a message indicating that the time has run out
-      countdownTimerEl.innerHTML = "Time's up!";
-    }
-
-    // Highlight timer when time is low
-    if (timeLeft < 25) {
-      document.getElementById("time-container").style.color = "red";
-    }
-  }, 1000);
-
-  // Disable the "Start Quiz" button
-  document.getElementById("start-quiz").disabled = true;
-
-  // Display the first quiz question and answer choices
-  displayQuiz();
-}
-
-// Set the questions and answers
+var storedResultsList = localStorage.getItem("quizResultsList");
+var resultsList = storedResultsList ? JSON.parse(storedResultsList) : [];
+  // Set the starting quiz index to 0
+ var quizIndex = 0;
 var correctAnswers = 0;
 
+// Set the questions and answers
 const quiz = [
   {
     question:
@@ -90,60 +58,43 @@ const quiz = [
     ],
     answer: 3,
   },
-  {
-    question: "6. Arrays in JavaScript can be used to store:",
-    choices: [
-      "Numbers and strings",
-      "Other strings",
-      "Booleans",
-      "All of the above",
-    ],
-    answer: 3,
-  },
-  {
-    question: "7. Arrays in JavaScript can be used to store:",
-    choices: [
-      "Numbers and strings",
-      "Other strings",
-      "Booleans",
-      "All of the above",
-    ],
-    answer: 3,
-  },
-  {
-    question: "8. Arrays in JavaScript can be used to store:",
-    choices: [
-      "Numbers and strings",
-      "Other strings",
-      "Booleans",
-      "All of the above",
-    ],
-    answer: 3,
-  },
-  {
-    question: "9. Arrays in JavaScript can be used to store:",
-    choices: [
-      "Numbers and strings",
-      "Other strings",
-      "Booleans",
-      "All of the above",
-    ],
-    answer: 3,
-  },
-  {
-    question: "10. Arrays in JavaScript can be used to store:",
-    choices: [
-      "Numbers and strings",
-      "Other strings",
-      "Booleans",
-      "All of the above",
-    ],
-    answer: 3,
-  },
+  
 ];
 
-// Set the starting quiz index to 0
-var quizIndex = 0;
+
+function startQuiz() {
+  // Get the countdown timer element
+  // Set the starting time in seconds
+  timeLeft = 90;
+  // Set the timer
+  countdownTimer = setInterval(function () {
+    // Display the current time left in the HTML element
+    countdownTimerEl.innerHTML = timeLeft;
+
+    // Subtract one second from the time left
+    timeLeft--;
+
+    // Check if the time has run out
+    if (timeLeft < 0) {
+      // Clear the timer interval
+      clearInterval(countdownTimer);
+
+      // Display a message indicating that the time has run out
+      countdownTimerEl.innerHTML = "Time's up!";
+    }
+
+    // Highlight timer when time is low
+    if (timeLeft < 25) {
+      document.getElementById("time-container").style.color = "red";
+    }
+  }, 1000);
+
+  // Disable the "Start Quiz" button
+  document.getElementById("start-quiz").disabled = true;
+
+  // Display the first quiz question and answer choices
+  displayQuiz();
+}
 
 // Display the current quiz question and answer choices
 function displayQuiz() {
@@ -178,7 +129,11 @@ function checkAnswer() {
   var selectedAnswer = document.querySelector('input[name="answer"]:checked');
 
   // Check if an answer is selected
-  if (selectedAnswer) {
+  if (!selectedAnswer) {
+    // Display an error message if no answer is selected
+    document.getElementById("result").innerHTML = "Please select an answer.";
+    return; // Add this line to prevent moving to the next question
+  }
     // Check if the answer is correct
     if (selectedAnswer.value == quiz[quizIndex].answer) {
       // Display a message indicating that the answer is correct
@@ -188,23 +143,19 @@ function checkAnswer() {
       // Play the correct sound
       correctSound.play();
     } else {
-      
       // Display a message indicating that the answer is incorrect
       document.getElementById("result").innerHTML =
         "Incorrect. 10 seconds deducted from time remaining.";
-
       // Subtract 10 seconds from the countdown timer
       timeLeft -= 10;
       // Play the incorrect sound
       incorrectSound.play();
     }
-  } else {
-    // Display an error message if no answer is selected
-    document.getElementById("result").innerHTML = "Please select an answer.";
-  }
+
 
   // Move to the next quiz question or finish the quiz
   quizIndex++;
+  console.log(quizIndex);
   if (quizIndex < quiz.length) {
     // Display the next quiz question and answer choices
     displayQuiz();
@@ -214,18 +165,6 @@ function checkAnswer() {
 
     // Redefine timer to ensure time left shows exactly what the results show
     countdownTimerEl.innerHTML = timeLeft;
-    // Save the current result
-    var currentResult = {
-      timeLeft: timeLeft,
-    };
-
-    // Add the current result to the list
-    resultsList.push(currentResult);
-
-    // Sort the list in descending order based on the time remaining
-    resultsList.sort(function (a, b) {
-      return b.timeLeft - a.timeLeft;
-    });
 
     // Save the sorted list back to local storage
     localStorage.setItem("quizResultsList", JSON.stringify(resultsList));
@@ -234,6 +173,7 @@ function checkAnswer() {
     document.getElementById("question").innerHTML = "";
     document.getElementById("choices").innerHTML = "";
     document.getElementById("submit-btn").style = "display: none";
+    document.getElementById("result").style = "display: inline";
 
     // Display a message indicating that the quiz is finished
     document.getElementById("result").innerHTML =
@@ -243,12 +183,42 @@ function checkAnswer() {
       quiz.length +
       " correct answers. </br> Time remaining: " +
       timeLeft +
-      " seconds. </br> <a href='results.html'>Click here to see your results.</a>";
+      " seconds.";
+      // Show the initials form
+      document.getElementById("initials-form").style.display = "inline";
   }
 }
 
-// Display the first quiz question and answer choices
-//displayQuiz();
 
-var storedResultsList = localStorage.getItem("quizResultsList");
-var resultsList = storedResultsList ? JSON.parse(storedResultsList) : [];
+function saveInitials() {
+  // Get the user's initials
+  var initials = document.getElementById("initials").value;
+
+  // Check if initials are entered
+  if (initials.trim() === "") {
+    alert("Please enter your initials.");
+    
+    checkAnswer(); // Return early without hiding the initials form
+    return;
+  }
+
+  // Save the current result
+  var currentResult = {
+    initials: initials,
+    timeLeft: timeLeft,
+    correctAnswers: correctAnswers,
+  };
+
+  // Add the current result to the list
+  resultsList.push(currentResult);
+
+  // Sort the list in descending order based on the time remaining
+  resultsList.sort(function (a, b) {
+    return b.timeLeft - a.timeLeft;
+  });
+
+  // Save the sorted list back to local storage
+  localStorage.setItem("quizResultsList", JSON.stringify(resultsList));
+}
+
+

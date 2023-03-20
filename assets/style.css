@@ -154,8 +154,31 @@ ol li {
 #result {
   margin-top: 30px;
   line-height: 25px;
+  /* display: none; */
 }
 
 #results {
   padding-top: 30px;
+}
+
+#initials-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    display: none;
+}
+
+#initials {
+        position: relative;
+        opacity: 100;
+        pointer-events:inherit;
+        background-color: transparent;
+        display: inline;
+        width: 75px;
+        text-align: center;
+        font-size: 24px;
+        border: none;
+        border-bottom: 2px solid var(--accent-color);
+        color: var(--light);
 }

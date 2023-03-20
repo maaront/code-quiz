@@ -9,7 +9,8 @@ if (storedResultsList) {
   var resultsHTML = "<ol>";
   for (var i = 0; i < resultsList.length; i++) {
     resultsHTML +=
-      "<li>Time remaining: " + resultsList[i].timeLeft + " seconds</li>";
+    "<li>" +
+    resultsList[i].initials + ": " + resultsList[i].timeLeft + " seconds</li>";
   }
   resultsHTML += "</ol>";
 
