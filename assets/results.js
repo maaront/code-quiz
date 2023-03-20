@@ -8,7 +8,8 @@ if (storedResultsList) {
   // Generate an ordered list with the results
   var resultsHTML = "<ol>";
   for (var i = 0; i < resultsList.length; i++) {
-    resultsHTML += "<li>Time remaining: " + resultsList[i].timeLeft + " seconds</li>";
+    resultsHTML +=
+      "<li>Time remaining: " + resultsList[i].timeLeft + " seconds</li>";
   }
   resultsHTML += "</ol>";
 
@@ -20,9 +21,8 @@ if (storedResultsList) {
   document.getElementById("clear-scores").style = "display: none";
 }
 
-
-// Clear scores 
+// Clear scores
 function clearScores() {
-    localStorage.removeItem("quizResultsList");
-    results.innerHTML = "";
+  localStorage.removeItem("quizResultsList");
+  results.innerHTML = "";
 }
