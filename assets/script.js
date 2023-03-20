@@ -23,6 +23,11 @@ function startQuiz() {
       // Display a message indicating that the time has run out
       countdownTimerEl.innerHTML = "Time's up!";
     }
+
+    // Highlight timer when time is low
+    if (timeLeft < 25) {
+      document.getElementById("time-container").style.color = "red";
+    }
   }, 1000);
 
   // Disable the "Start Quiz" button
@@ -65,7 +70,7 @@ const quiz = [
     answer: 0,
   },
   {
-    question: "4. Where is the Ícorrect place to insert a JavaScript?",
+    question: "4. Where is the correct place to insert JavaScript?",
     choices: [
       "The &lt;head&gt; section",
       "The &lt;body&gt; section",
