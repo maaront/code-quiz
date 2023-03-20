@@ -20,13 +20,8 @@ if (storedResultsList) {
 }
 
 
-
-
-//  // Creates element based on tag entered by user
-//  var tag = document.createElement(tagName);
-
-//  // Adds text content to created tag
-//  tag.textContent = "This was made via prompts. It's a " + tagName + ".";
- 
-//  // Appends tag as child of document body
-//  document.body.appendChild(tag);
+// Clear scores 
+function clearScores() {
+    localStorage.removeItem("quizResultsList");
+    results.innerHTML = "";
+}
