@@ -171,6 +171,9 @@ function displayQuiz() {
 
 // Check the user's answer and display a message
 function checkAnswer() {
+  // Get the audio elements
+  const correctSound = document.getElementById('correct-sound');
+  const incorrectSound = document.getElementById('incorrect-sound');
   // Get the user's answer
   var selectedAnswer = document.querySelector('input[name="answer"]:checked');
 
@@ -182,13 +185,18 @@ function checkAnswer() {
       document.getElementById("result").innerHTML = "Correct!";
       // Increment the correctAnswers count
       correctAnswers++;
+      // Play the correct sound
+      correctSound.play();
     } else {
+      
       // Display a message indicating that the answer is incorrect
       document.getElementById("result").innerHTML =
         "Incorrect. 10 seconds deducted from time remaining.";
 
       // Subtract 10 seconds from the countdown timer
       timeLeft -= 10;
+      // Play the incorrect sound
+      incorrectSound.play();
     }
   } else {
     // Display an error message if no answer is selected
