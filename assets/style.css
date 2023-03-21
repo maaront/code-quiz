@@ -63,7 +63,6 @@ header {
 }
 
 /* Quiz Intro */
-
 .quiz-intro {
   display: flex;
   justify-content: center;
@@ -161,6 +160,7 @@ ol li {
   padding-top: 30px;
 }
 
+/* Form to input initials */
 #initials-form {
     display: flex;
     flex-direction: row;

@@ -7,29 +7,36 @@
     <link rel="stylesheet" type="text/css" href="assets/style.css" />
   </head>
 <body>
+    <!-- Navigation holds the highscores link and the timer -->
     <nav>
         <p><a href="results.html" class="highscores">View High Scores</a></p>
         <p id="time-container">Time Left: <span id="countdown-timer">90</span></p>
     </nav>
     <header>
+        <!-- Set up the introductory element -->
         <span id="quiz-intro">
             <h1>Coding Quiz Challenge</h1>
             <p>Try to answer the following code-related questions within the time imit. Incorrect answers will penalize your score time by ten seconds.</p>    
+            <!-- Clicking button kicks off the Quiz function -->
             <button id="start-quiz" onclick="startQuiz()">Start Quiz</button>
         </span>
     </header>
     <main>
+        <!-- This span holds the question, answers, submit button, and results -->
         <span class="question-card">
             <h2 id="question"></h2>
             <ul id="choices"></ul>
+            <!-- Clicking submit checks answer to question via checkAnswer function -->
             <button onclick="checkAnswer()" id="submit-btn">Submit Answer</button>
             <p id="result"></p>
+            <!-- Form for user to inter initials -->
             <form id="initials-form">
                 <p id="initials-copy">Enter your initials:</p>
                 <input type="text" id="initials" maxlength="3" required/>
                 <button id="save-initials" onclick="saveInitials()">Save Score</button>
             </form>
         </span>
+        <!-- Add audio files -->
         <audio id="correct-sound" src="assets/sfx/correct.wav" preload="auto"></audio>
         <audio id="incorrect-sound" src="assets/sfx/incorrect.wav" preload="auto"></audio>
     </main>

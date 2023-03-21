@@ -2,7 +2,7 @@
 var storedResultsList = localStorage.getItem("quizResultsList");
 
 if (storedResultsList) {
-  // Parse the results list
+  // If results are available, then parse the results list
   var resultsList = JSON.parse(storedResultsList);
 
   // Generate an ordered list with the results
@@ -17,7 +17,7 @@ if (storedResultsList) {
   // Display the ordered list on the page
   document.getElementById("results").innerHTML = resultsHTML;
 } else {
-  // Display a message if there are no results in local storage
+  // Display a message and hide the Clear Results button if there are no results in local storage
   document.getElementById("results").innerHTML = "No results found.";
   document.getElementById("clear-scores").style = "display: none";
 }

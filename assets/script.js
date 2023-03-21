@@ -1,3 +1,4 @@
+// Set global veriables
 var countdownTimer;
 var timeLeft = 90;
 var countdownTimerEl = document.getElementById("countdown-timer");
@@ -61,24 +62,20 @@ const quiz = [
   
 ];
 
-
+// Start the quiz
 function startQuiz() {
-  // Get the countdown timer element
   // Set the starting time in seconds
   timeLeft = 90;
   // Set the timer
   countdownTimer = setInterval(function () {
     // Display the current time left in the HTML element
     countdownTimerEl.innerHTML = timeLeft;
-
     // Subtract one second from the time left
     timeLeft--;
-
     // Check if the time has run out
     if (timeLeft < 0) {
-      // Clear the timer interval
+      // If so, pause the timer
       clearInterval(countdownTimer);
-
       // Display a message indicating that the time has run out
       countdownTimerEl.innerHTML = "Time's up!";
     }
@@ -98,7 +95,9 @@ function startQuiz() {
 
 // Display the current quiz question and answer choices
 function displayQuiz() {
+  // Now that the quiz has started, hide the intro text
   document.getElementById("quiz-intro").style = "display: none";
+  // And display the Submit Button
   document.getElementById("submit-btn").style = "display: inline";
 
   // Get the current quiz question and answer choices
@@ -107,8 +106,9 @@ function displayQuiz() {
 
   // Display the current quiz question and answer choices in the HTML
   document.getElementById("question").innerHTML = question;
-
+  // Set choicesHTML variable and mark as empty
   var choicesHTML = "";
+  // Loop to move through list of questions and choices
   for (var i = 0; i < choices.length; i++) {
     choicesHTML +=
       '<li><label><input type="radio" name="answer" value="' +
@@ -125,10 +125,10 @@ function checkAnswer() {
   // Get the audio elements
   const correctSound = document.getElementById('correct-sound');
   const incorrectSound = document.getElementById('incorrect-sound');
-  // Get the user's answer
+  // Create selectedAnswer variable to get the user's answer from input
   var selectedAnswer = document.querySelector('input[name="answer"]:checked');
 
-  // Check if an answer is selected
+  // Check if no answer is selected
   if (!selectedAnswer) {
     // Display an error message if no answer is selected
     document.getElementById("result").innerHTML = "Please select an answer.";
@@ -152,15 +152,15 @@ function checkAnswer() {
       incorrectSound.play();
     }
 
-
   // Move to the next quiz question or finish the quiz
+  // Increment the quizIndex
   quizIndex++;
-  console.log(quizIndex);
+  // If quizIndex is less than the length of the quiz...
   if (quizIndex < quiz.length) {
     // Display the next quiz question and answer choices
     displayQuiz();
   } else {
-    // Clear the timer interval (pause the timer)
+    // The quiz is over, clear the timer interval (pause the timer)
     clearInterval(countdownTimer);
 
     // Redefine timer to ensure time left shows exactly what the results show
@@ -173,6 +173,8 @@ function checkAnswer() {
     document.getElementById("question").innerHTML = "";
     document.getElementById("choices").innerHTML = "";
     document.getElementById("submit-btn").style = "display: none";
+
+    // Unhide the results sections
     document.getElementById("result").style = "display: inline";
 
     // Display a message indicating that the quiz is finished
@@ -189,25 +191,18 @@ function checkAnswer() {
   }
 }
 
-
+// Function to get initials and add them to the time
 function saveInitials() {
-  // Get the user's initials
+  // Get the user's initials from the text input
   var initials = document.getElementById("initials").value;
 
-  // Check if initials are entered
-  if (initials.trim() === "") {
-    // document.getElementById("initials-copy").innerHTML = "Initials cannot be blank.";
-    return;
-  }
-
-  // Save the current result
+  // Save the current result with initials and time left
   var currentResult = {
     initials: initials,
     timeLeft: timeLeft,
-    correctAnswers: correctAnswers,
   };
 
-  // Add the current result to the list
+  // Add the current result to the results list
   resultsList.push(currentResult);
 
   // Sort the list in descending order based on the time remaining
